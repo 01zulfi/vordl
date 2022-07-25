@@ -5,6 +5,7 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
 const authRouter = require("./routes/auth");
+const isAuthenticated = require("./middlewares/auth");
 
 require("./config/mongodb");
 
@@ -17,5 +18,8 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/auth", authRouter);
+app.use("/test", isAuthenticated, (req, res) => {
+  res.json({ user: req.user });
+});
 
 module.exports = app;
