@@ -5,8 +5,10 @@ const cookieParser = require("cookie-parser");
 const logger = require("morgan");
 
 const user = require("./user");
+const file = require("./file");
 
 require("./config/mongodb");
+require("./config/cloudinary");
 
 const app = express();
 
@@ -17,5 +19,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/user", user.route);
+app.use("/file", file.route);
 
 module.exports = app;
