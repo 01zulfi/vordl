@@ -17,4 +17,8 @@ const updateMemo = async (id, memoData) => {
   return memo;
 };
 
-module.exports = { addMemo, updateMemo };
+const deleteMemo = async (id) => {
+  await Memo.findByIdAndRemove(id).exec();
+};
+
+module.exports = { addMemo, updateMemo, deleteMemo };

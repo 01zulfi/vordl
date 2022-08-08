@@ -24,3 +24,12 @@ exports.updateMemo = async (req, res) => {
     res.status(500).json({ err });
   }
 };
+
+exports.deleteMemo = async (req, res) => {
+  try {
+    await memoService.deleteMemo(req.params.id);
+    res.status(200).json({ message: "Memo deleted." });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+};
