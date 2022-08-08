@@ -6,6 +6,7 @@ const logger = require("morgan");
 
 const user = require("./user");
 const file = require("./file");
+const memo = require("./memo");
 
 require("./config/mongodb");
 require("./config/cloudinary");
@@ -20,5 +21,6 @@ app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/user", user.route);
 app.use("/file", user.authenticate, file.route);
+app.use("/memo", user.authenticate, memo.route);
 
 module.exports = app;

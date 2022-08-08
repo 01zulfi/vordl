@@ -4,7 +4,7 @@ const { Schema } = mongoose;
 
 const MemoSchema = new Schema(
   {
-    name: String,
+    title: String,
     content: String,
     creator: { type: Schema.ObjectId, ref: "User" },
     vord: { type: Schema.ObjectId, ref: "Vord" },
