@@ -7,6 +7,7 @@ const logger = require("morgan");
 const user = require("./user");
 const file = require("./file");
 const memo = require("./memo");
+const vord = require("./vord");
 
 require("./config/mongodb");
 require("./config/cloudinary");
@@ -22,5 +23,6 @@ app.use(express.static(path.join(__dirname, "public")));
 app.use("/v1/user", user.route);
 app.use("/v1/file", user.authenticate, file.route);
 app.use("/v1/memo", user.authenticate, memo.route);
+app.use("/v1/vord", user.authenticate, vord.route);
 
 module.exports = app;
