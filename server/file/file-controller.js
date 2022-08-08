@@ -9,6 +9,15 @@ exports.getAllFiles = async (req, res) => {
   }
 };
 
+exports.getFileByFilename = async (req, res) => {
+  try {
+    const file = await fileService.getFileByFilename(req.params.filename);
+    res.status(200).json({ file });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
+};
+
 exports.upload = (req, res) => {
   try {
     console.log({ "req.file": req.file });

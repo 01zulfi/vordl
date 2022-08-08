@@ -4,6 +4,8 @@ const File = require("./file-model");
 
 const getAllFiles = async () => File.find();
 
+const getFileByFilename = async (filename) => File.findOne({ filename });
+
 const saveFileInDatabase =
   ({ creator, vord }) =>
   async (fileMetadata) => {
@@ -40,4 +42,4 @@ const uploadAndSave = ({ file, creator, vord }) => {
   uploadToCloudinary(file, saveFileInDatabase({ creator, vord }));
 };
 
-module.exports = { getAllFiles, uploadAndSave };
+module.exports = { getAllFiles, getFileByFilename, uploadAndSave };
