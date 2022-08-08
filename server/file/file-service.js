@@ -2,6 +2,8 @@ const cloudinary = require("cloudinary").v2;
 const streamifier = require("streamifier");
 const File = require("./file-model");
 
+const getAllFiles = async () => File.find();
+
 const saveFileInDatabase =
   ({ creator, vord }) =>
   async (fileMetadata) => {
@@ -38,4 +40,4 @@ const uploadAndSave = ({ file, creator, vord }) => {
   uploadToCloudinary(file, saveFileInDatabase({ creator, vord }));
 };
 
-module.exports = { uploadAndSave };
+module.exports = { getAllFiles, uploadAndSave };
