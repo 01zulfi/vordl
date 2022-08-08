@@ -19,6 +19,6 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
 app.use("/user", user.route);
-app.use("/file", file.route);
+app.use("/file", user.authenticate, file.route);
 
 module.exports = app;

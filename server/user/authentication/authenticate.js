@@ -12,7 +12,11 @@ const authenticate = async (req, res, next) => {
     req.user = await userService.getUserById(payload.userId);
     next();
   } catch (err) {
-    next(err);
+    if (err instanceof jwt.TokenExpiredError) {
+      res.status(401).json({ message: "jwt expired" });
+    } else {
+      next(err);
+    }
   }
 };
 
