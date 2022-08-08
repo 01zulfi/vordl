@@ -19,8 +19,8 @@ app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, "public")));
 
-app.use("/user", user.route);
-app.use("/file", user.authenticate, file.route);
-app.use("/memo", user.authenticate, memo.route);
+app.use("/v1/user", user.route);
+app.use("/v1/file", user.authenticate, file.route);
+app.use("/v1/memo", user.authenticate, memo.route);
 
 module.exports = app;
