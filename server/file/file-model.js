@@ -4,8 +4,9 @@ const { Schema } = mongoose;
 
 const FileSchema = new Schema(
   {
-    name: String,
+    filename: String,
     url: String,
+    format: String,
     creator: { type: Schema.ObjectId, ref: "User" },
     vord: { type: Schema.ObjectId, ref: "Vord" },
   },

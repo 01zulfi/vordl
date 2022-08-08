@@ -1,4 +1,17 @@
-exports.upload = async (req, res) => {
-  console.log({ "req.file": req.file });
-  res.end();
+const fileService = require("./file-service");
+
+exports.upload = (req, res) => {
+  try {
+    console.log({ "req.file": req.file });
+    if (req.file) {
+      fileService.uploadAndSave({
+        file: req.file,
+        creator: req.body.creator,
+        vord: req.body.vord,
+      });
+    }
+    res.status(200).json({ message: "File uploaded successfully." });
+  } catch (err) {
+    res.status(500).json({ err });
+  }
 };
