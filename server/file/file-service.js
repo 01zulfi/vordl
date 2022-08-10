@@ -6,6 +6,8 @@ const getAllFiles = async () => File.find();
 
 const getFileByFilename = async (filename) => File.findOne({ filename });
 
+const getVordFiles = async (vordId) => File.find({ vord: vordId });
+
 const saveFileInDatabase =
   ({ creator, vord }) =>
   async (fileMetadata) => {
@@ -42,4 +44,9 @@ const uploadAndSave = ({ file, creator, vord }) => {
   uploadToCloudinary(file, saveFileInDatabase({ creator, vord }));
 };
 
-module.exports = { getAllFiles, getFileByFilename, uploadAndSave };
+module.exports = {
+  getAllFiles,
+  getFileByFilename,
+  getVordFiles,
+  uploadAndSave,
+};
