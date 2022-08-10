@@ -1,7 +1,14 @@
 const Memo = require("./memo-model");
+const toObjectId = require("../utils/to-objectid");
+
+const getVordMemos = async (vordId) => Memo.find({ vord: vordId });
 
 const addMemo = async (memoData) => {
-  const memoDoc = new Memo(memoData);
+  const memoDoc = new Memo({
+    ...memoData,
+    creator: toObjectId(memoData.creator),
+    vord: toObjectId(memoData.vord),
+  });
   await memoDoc.save();
   return memoDoc;
 };
@@ -21,4 +28,4 @@ const deleteMemo = async (id) => {
   await Memo.findByIdAndRemove(id).exec();
 };
 
-module.exports = { addMemo, updateMemo, deleteMemo };
+module.exports = { getVordMemos, addMemo, updateMemo, deleteMemo };
