@@ -4,7 +4,7 @@ const validObjectIdString = require("../../utils/valid-objectid-string");
 const bodyValidation = [
   body("title")
     .isLength({ min: 3 })
-    .withMessage("Memo title must be at least 3 characters long")
+    .withMessage("Memo title must be at least 3 characters long.")
     .trim(),
   body("content").optional().trim(),
   body("creator")
