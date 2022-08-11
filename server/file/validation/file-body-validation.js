@@ -1,4 +1,5 @@
 const { body } = require("express-validator");
+const validObjectIdString = require("../../utils/valid-objectid-string");
 
 const fileBodyValidation = [
   body("file")
@@ -15,6 +16,12 @@ const fileBodyValidation = [
       return allowedExtensions.some((ext) => req.file.mimetype.includes(ext));
     })
     .withMessage("File type not supported."),
+  body("creator")
+    .custom((value) => validObjectIdString(value))
+    .withMessage("Invalid user Id."),
+  body("vord")
+    .custom((value) => validObjectIdString(value))
+    .withMessage("Invalid vord Id."),
 ];
 
 module.exports = fileBodyValidation;
