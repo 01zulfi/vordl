@@ -1,19 +1,14 @@
-const isValidName = require("./validation/is-valid-name");
-const isValidEmail = require("./validation/is-valid-email");
-const isValidPassword = require("./validation/is-valid-password");
 const userService = require("./user-service");
+
+const COOKIE_OPTIONS = {
+  secure: true,
+  httpOnly: true,
+  maxAge: 2592000000, // 30days
+};
 
 exports.register = async (req, res) => {
   try {
     const { name, email, password } = req.body;
-    if (
-      !isValidName(name) ||
-      !isValidEmail(email) ||
-      !isValidPassword(password)
-    ) {
-      return res.status(400).json({ message: "All fields must be filled." });
-    }
-
     const user = await userService.getUserByEmail(email);
     if (user) {
       return res.status(400).json({ message: "User already exists." });
@@ -22,9 +17,7 @@ exports.register = async (req, res) => {
     const token = await userService.register({ name, email, password });
 
     return res
-      .cookie("token", token, {
-        httpOnly: true,
-      })
+      .cookie("token", token, COOKIE_OPTIONS)
       .status(200)
       .json({ message: "User successfully registered." });
   } catch (err) {
@@ -35,10 +28,6 @@ exports.register = async (req, res) => {
 exports.login = async (req, res) => {
   try {
     const { email, password } = req.body;
-    if (!isValidEmail(email) || !isValidPassword(password)) {
-      return res.status(400).json({ message: "All fields must be filled." });
-    }
-
     const user = await userService.getUserByEmail(email);
     if (!user) {
       return res
@@ -57,9 +46,7 @@ exports.login = async (req, res) => {
     const token = userService.login(user._id);
 
     return res
-      .cookie("token", token, {
-        httpOnly: true,
-      })
+      .cookie("token", token, COOKIE_OPTIONS)
       .status(200)
       .json({ message: "User successfully signed in." });
   } catch (err) {
