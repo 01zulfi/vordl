@@ -4,7 +4,7 @@ const validObjectIdString = require("../../utils/valid-objectid-string");
 const vordBodyValidation = [
   body("name")
     .isLength({ min: 3 })
-    .withMessage("Vord title must be at least 3 characters long.")
+    .withMessage("Vord name must be at least 3 characters long.")
     .trim(),
   body("description").optional().trim(),
   body("creator")
