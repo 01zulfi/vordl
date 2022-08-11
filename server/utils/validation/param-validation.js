@@ -9,6 +9,10 @@ const paramValidation = {
     .optional()
     .custom((value) => validObjectIdString(value))
     .withMessage("Invalid vord Id in url."),
+  userId: param("userId")
+    .optional()
+    .custom((value) => validObjectIdString(value))
+    .withMessage("Invalid user Id in url."),
 };
 
 module.exports = paramValidation;
