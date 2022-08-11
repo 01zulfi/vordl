@@ -1,5 +1,6 @@
 const express = require("express");
 const vordBodyValidation = require("./validation/vord-body-validation");
+const accessBodyValidation = require("./validation/access-body-validation");
 const validation = require("../utils/validation");
 
 const router = express.Router();
@@ -35,6 +36,20 @@ router.delete(
   validation.param.vordId,
   validation.errorHandler,
   controller.deleteVord
+);
+router.patch(
+  "/:vordId/provide-access",
+  validation.param.vordId,
+  accessBodyValidation,
+  validation.errorHandler,
+  controller.provideAccess
+);
+router.patch(
+  "/:vordId/remove-access",
+  validation.param.vordId,
+  accessBodyValidation,
+  validation.errorHandler,
+  controller.removeAccess
 );
 
 module.exports = router;

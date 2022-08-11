@@ -28,4 +28,22 @@ const updateVord = async (id, vordData) => {
 
 const deleteVord = async (id) => Vord.findByIdAndRemove(id).exec();
 
-module.exports = { addVord, getVordById, getUserVords, updateVord, deleteVord };
+const provideAccess = async ({ userId, vordId }) => {
+  await Vord.findByIdAndUpdate(vordId, {
+    $push: { access: userId },
+  }).exec();
+};
+
+const removeAccess = async ({ userId, vordId }) => {
+  await Vord.findByIdAndUpdate(vordId, { $pull: { access: userId } }).exec();
+};
+
+module.exports = {
+  addVord,
+  getVordById,
+  getUserVords,
+  updateVord,
+  deleteVord,
+  provideAccess,
+  removeAccess,
+};

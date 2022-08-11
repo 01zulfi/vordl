@@ -57,3 +57,25 @@ exports.deleteVord = async (req, res) => {
     return res.status(500).json({ err });
   }
 };
+
+exports.provideAccess = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const { vordId } = req.params;
+    await vordService.provideAccess({ userId, vordId });
+    return res.status(200).json({ message: "Access provided." });
+  } catch (err) {
+    return res.status(500).json({ err });
+  }
+};
+
+exports.removeAccess = async (req, res) => {
+  try {
+    const { userId } = req.body;
+    const { vordId } = req.params;
+    await vordService.removeAccess({ userId, vordId });
+    return res.status(200).json({ message: "Access removed." });
+  } catch (err) {
+    return res.status(500).json({ err });
+  }
+};
