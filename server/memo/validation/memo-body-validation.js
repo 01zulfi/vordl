@@ -1,7 +1,7 @@
 const { body } = require("express-validator");
 const validObjectIdString = require("../../utils/valid-objectid-string");
 
-const bodyValidation = [
+const memoBodyValidation = [
   body("title")
     .isLength({ min: 3 })
     .withMessage("Memo title must be at least 3 characters long.")
@@ -15,4 +15,4 @@ const bodyValidation = [
     .withMessage("Invalid vord Id."),
 ];
 
-module.exports = bodyValidation;
+module.exports = memoBodyValidation;

@@ -1,15 +1,14 @@
 const { param } = require("express-validator");
-const validObjectIdString = require("../../utils/valid-objectid-string");
+const validObjectIdString = require("../valid-objectid-string");
 
-const paramValidation = [
-  param("memoId")
-    .optional()
+const paramValidation = {
+  memoId: param("memoId")
     .custom((value) => validObjectIdString(value))
     .withMessage("Invalid memo Id in url."),
-  param("vordId")
+  vordId: param("vordId")
     .optional()
     .custom((value) => validObjectIdString(value))
     .withMessage("Invalid vord Id in url."),
-];
+};
 
 module.exports = paramValidation;

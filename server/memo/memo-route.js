@@ -1,5 +1,6 @@
 const express = require("express");
-const memoValidation = require("./validation");
+const memoBodyValidation = require("./validation/memo-body-validation");
+const validation = require("../utils/validation");
 
 const router = express.Router();
 
@@ -7,27 +8,27 @@ const controller = require("./memo-controller");
 
 router.get(
   "/vord/:vordId",
-  memoValidation.param,
-  memoValidation.errorHandler,
+  validation.param.vordId,
+  validation.errorHandler,
   controller.getVordMemos
 );
 router.post(
   "/",
-  memoValidation.body,
-  memoValidation.errorHandler,
+  memoBodyValidation,
+  validation.errorHandler,
   controller.addMemo
 );
 router.put(
   "/:memoId",
-  memoValidation.body,
-  memoValidation.param,
-  memoValidation.errorHandler,
+  memoBodyValidation,
+  validation.param.memoId,
+  validation.errorHandler,
   controller.updateMemo
 );
 router.delete(
   "/:memoId",
-  memoValidation.param,
-  memoValidation.errorHandler,
+  validation.param.memoId,
+  validation.errorHandler,
   controller.deleteMemo
 );
 
