@@ -25,10 +25,32 @@ const login = (userId) => generateJwt(userId);
 const isCorrectPassword = async (passwordToMatch, userPassword) =>
   bcrypt.compare(passwordToMatch, userPassword);
 
+const updateUser = async (userId, userData) => {
+  const user = await User.findByIdAndUpdate(
+    userId,
+    { ...userData },
+    { returnDocument: "after" }
+  ).exec();
+  return user;
+};
+
+const updateUserPassword = async (userId, password) => {
+  const salt = await bcrypt.genSalt(10);
+  const hashedPassword = await bcrypt.hash(password, salt);
+  const user = await User.findByIdAndUpdate(
+    userId,
+    { password: hashedPassword },
+    { returnDocument: "after" }
+  ).exec();
+  return user;
+};
+
 module.exports = {
   getUserByEmail,
   getUserById,
   register,
   login,
   isCorrectPassword,
+  updateUser,
+  updateUserPassword,
 };

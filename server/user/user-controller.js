@@ -53,3 +53,41 @@ exports.login = async (req, res) => {
     return res.status(500).json({ err });
   }
 };
+
+exports.getUser = async (req, res) => {
+  try {
+    const { user } = req;
+    return res.status(200).json({ user, message: "User found." });
+  } catch (err) {
+    return res.status(500).json({ err });
+  }
+};
+
+exports.updateUser = async (req, res) => {
+  try {
+    const { user } = req;
+    const { name, email } = req.body;
+    const updatedUser = await userService.updateUser(user._id, { name, email });
+    return res
+      .status(200)
+      .json({ user: updatedUser, message: "User updated." });
+  } catch (err) {
+    return res.status(500).json({ err });
+  }
+};
+
+exports.updateUserPassword = async (req, res) => {
+  try {
+    const { user } = req;
+    const { password } = req.body;
+    const updatedUser = await userService.updateUserPassword(
+      user._id,
+      password
+    );
+    return res
+      .status(200)
+      .json({ user: updatedUser, message: "User's password updated." });
+  } catch (err) {
+    return res.status(500).json({ err });
+  }
+};
