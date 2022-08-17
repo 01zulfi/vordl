@@ -34,6 +34,8 @@
       { "ts": "never", "tsx": "never" }
     ],
     "react/jsx-filename-extension": ["warn", { "extensions": [".tsx"] }],
-    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }]
+    "import/no-extraneous-dependencies": ["error", { "devDependencies": true }],
+    "react/prop-types": 0,
+    "react/require-default-props": 0
   }
 }
