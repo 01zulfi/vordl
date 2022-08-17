@@ -15,10 +15,6 @@ router.post(
 );
 router.post(
   "/login",
-  (req, res, next) => {
-    console.log(req);
-    next();
-  },
   userBodyValidation,
   validation.errorHandler,
   controller.login
