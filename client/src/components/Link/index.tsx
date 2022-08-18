@@ -1,9 +1,9 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 import { NavLink, Link as RouterLink } from 'react-router-dom';
 
 interface LinkProps {
   to: string;
-  children: React.ReactNode;
+  children: ReactNode;
   type: 'internal' | 'external';
   styling: 'button' | 'link';
   isNavLink?: boolean;

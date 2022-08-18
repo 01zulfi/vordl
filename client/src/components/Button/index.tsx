@@ -1,7 +1,7 @@
-import { MouseEvent, FC } from 'react';
+import { MouseEvent, FC, ReactNode } from 'react';
 
 interface ButtonProps {
-  children: React.ReactNode;
+  children: ReactNode;
   onClick: (e: MouseEvent<HTMLButtonElement>) => void;
   variant: 'contained' | 'outlined';
   color?: 'success' | 'error' | 'default';
