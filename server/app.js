@@ -15,11 +15,18 @@ require("./config/cloudinary");
 
 const app = express();
 
+app.use((req, res, next) => {
+  res.setHeader("Access-Control-Allow-Origin", process.env.CLIENT_URL);
+  res.setHeader("Access-Control-Allow-Credentials", "true");
+  next();
+});
+
 app.use(
   cors({
     origin: process.env.CLIENT_URL,
   })
 );
+
 app.use(logger("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
