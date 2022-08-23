@@ -2,10 +2,11 @@ import { MouseEvent, FC, ReactNode } from 'react';
 
 interface ButtonProps {
   children: ReactNode;
-  onClick: (e: MouseEvent<HTMLButtonElement>) => void;
+  onClick?: (e: MouseEvent<HTMLButtonElement>) => void;
   variant: 'contained' | 'outlined';
   color?: 'success' | 'error' | 'default';
   disabled?: boolean;
+  type: 'button' | 'submit' | 'reset';
 }
 
 const Button: FC<ButtonProps> = function Button({
@@ -14,10 +15,12 @@ const Button: FC<ButtonProps> = function Button({
   variant,
   disabled,
   color,
+  type,
 }) {
+  /* eslint-disable react/button-has-type */
   return (
     <button
-      type="button"
+      type={type}
       className={`${variant} ${color}`}
       onClick={onClick}
       disabled={disabled}
