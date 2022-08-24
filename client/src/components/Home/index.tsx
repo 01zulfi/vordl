@@ -16,10 +16,6 @@ const Home: FC<HomeProps> = function Home({ redirectIfLoggedIn }) {
 
   if (isLoading) return <div>Loading...</div>;
 
-  if (redirectIfLoggedIn) {
-    return null;
-  }
-
   return (
     <div>
       <h1>Home</h1>
