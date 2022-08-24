@@ -1,5 +1,5 @@
 import axios from 'axios';
-import requestHeaders from '../../../utils/request-headers';
+import requestOptions from '../../../utils/request-options';
 import API_URL from '../../../utils/api-url';
 
 const requestUrl = `${API_URL}/v1/user/login`;
@@ -10,6 +10,6 @@ const login = async ({
 }: {
   email: string;
   password: string;
-}) => axios.post(requestUrl, { email, password }, { ...requestHeaders });
+}) => axios.post(requestUrl, { email, password }, { ...requestOptions });
 
 export default login;

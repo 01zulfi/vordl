@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import axios from 'axios';
 import API_URL from '../utils/api-url';
-import requestHeaders from '../utils/request-headers';
+import requestOptions from '../utils/request-options';
 
 const requestUrl = `${API_URL}/v1/user`;
 
@@ -12,7 +12,7 @@ interface UserInterface {
 }
 
 const getUser = async (): Promise<UserInterface> => {
-  const response = await axios.get(requestUrl, { ...requestHeaders });
+  const response = await axios.get(requestUrl, { ...requestOptions });
   return response.data.user;
 };
 const useGetUser = ({
