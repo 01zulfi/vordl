@@ -3,20 +3,32 @@ import Form from '../../Form';
 import Button from '../../Button';
 import Input, { onTextInputChange } from '../../Input';
 import useLogin from './use-login';
+import Link from '../../Link';
 
 const Login: FC = function Login() {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const { login, isLoading, isError, errors } = useLogin();
+  const { shouldLogin, login, isLoading, isError, errors } = useLogin();
+
+  if (!shouldLogin) {
+    return (
+      <>
+        <h1>Already signed in</h1>
+        <Link to="/dashboard" type="internal" styling="link">
+          Go to dashboard
+        </Link>
+      </>
+    );
+  }
+
+  if (isLoading) {
+    return <div>Loading...</div>;
+  }
 
   const onLoginFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     login({ email, password });
   };
-
-  if (isLoading) {
-    return <div>Loading...</div>;
-  }
 
   return (
     <section>
