@@ -15,6 +15,7 @@ const getUser = async (): Promise<UserInterface> => {
   const response = await axios.get(requestUrl, { ...requestOptions });
   return response.data.user;
 };
+
 const useGetUser = ({
   onSuccess,
   onError,
