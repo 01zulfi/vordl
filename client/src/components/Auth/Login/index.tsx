@@ -1,4 +1,5 @@
 import { FC, FormEvent, useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import Form from '../../Form';
 import Button from '../../Button';
 import Input, { onTextInputChange } from '../../Input';
@@ -6,6 +7,7 @@ import useLogin from './use-login';
 import Link from '../../Link';
 
 const Login: FC = function Login() {
+  const navigate = useNavigate()
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { shouldLogin, login, isLoading, isError, errors } = useLogin();
@@ -27,7 +29,7 @@ const Login: FC = function Login() {
 
   const onLoginFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    login({ email, password });
+    login({ email, password }, {onSuccess: () => navigate('/dashboard')});
   };
 
   return (
