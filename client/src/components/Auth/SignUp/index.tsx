@@ -3,16 +3,17 @@ import { useNavigate } from 'react-router-dom';
 import Form from '../../Form';
 import Button from '../../Button';
 import Input, { onTextInputChange } from '../../Input';
-import useLogin from './use-login';
+import useSignUp from './use-sign-up';
 import Link from '../../Link';
 
-const Login: FC = function Login() {
+const SignUp: FC = function Login() {
   const navigate = useNavigate()
+  const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const loginMutation = useLogin();
+  const signUpMutation = useSignUp();
 
-  if (!loginMutation.shouldLogin()) {
+  if (!signUpMutation.shouldSignUp()) {
     return (
       <>
         <h1>Already signed in</h1>
@@ -23,18 +24,32 @@ const Login: FC = function Login() {
     );
   }
 
-  if (loginMutation.isLoading) {
+  if (signUpMutation.isLoading) {
     return <div>Loading...</div>;
   }
+  
+  
 
-  const onLoginFormSubmit = (e: FormEvent<HTMLFormElement>) => {
+  const onSignUpFormSubmit = (e: FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    loginMutation.login({ email, password }, {onSuccess: () => navigate('/dashboard')});
+    signUpMutation.signUp({ name, email, password }, {onSuccess: () => navigate('/dashboard')});
   };
 
   return (
     <section>
-      <Form onSubmit={onLoginFormSubmit}>
+      <Form onSubmit={onSignUpFormSubmit}>
+        <label htmlFor="name">
+          Name
+          <Input
+            id="name"
+            placeholder="name"
+            type="text"
+            name="name"
+            value={name}
+            onChange={onTextInputChange(setName)}
+          />
+        </label>
+
         <label htmlFor="email">
           Email
           <Input
@@ -62,10 +77,10 @@ const Login: FC = function Login() {
           Submit
         </Button>
 
-        {loginMutation.isError && loginMutation.errors().map((error) => <div key={error}>{error}</div>)}
+        {signUpMutation.isError && signUpMutation.errors().map((error) => <div key={error}>{error}</div>)}
       </Form>
     </section>
   );
 };
 
-export default Login;
+export default SignUp;
