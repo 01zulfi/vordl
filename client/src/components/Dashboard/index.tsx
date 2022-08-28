@@ -3,20 +3,20 @@ import useGetUser from '../../user/use-get-user';
 
 const Dashboard = function Dashboard() {
   const navigate = useNavigate();
-  const { user, isLoading } = useGetUser({
+  const user = useGetUser({
     onError: () => {
       navigate('/login');
     },
   });
 
-  if (isLoading) return <div>Loading...</div>;
+  if (user.isLoading) return <div>Loading...</div>;
 
-  if (!user) return null;
+  if (!user.data) return null;
 
   return (
     <div>
-      <h1>{user.name}</h1>
-      <p>{user.email}</p>
+      <h1>{user.data.name}</h1>
+      <p>{user.data.email}</p>
     </div>
   );
 };

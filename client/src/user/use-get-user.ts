@@ -23,13 +23,13 @@ const useGetUser = ({
   onSuccess?: () => void;
   onError?: () => void;
 }) => {
-  const { isLoading, data } = useQuery(['get-user'], getUser, {
+  const userQuery = useQuery(['get-user'], getUser, {
     onSuccess: () => onSuccess && onSuccess(),
     onError: () => onError && onError(),
     retry: false,
   });
 
-  return { isLoading, user: data };
+  return userQuery;
 };
 
 export default useGetUser;
